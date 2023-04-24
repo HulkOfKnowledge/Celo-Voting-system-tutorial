@@ -697,6 +697,7 @@ contract VotingSystemAttempt{
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
         require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
         require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
+        require(candidateDetails[_name].name == "", "Candidate with this name is already registered");
 
         candidateDetails[addr]= Candidate(_name,addr,_party);
         electionDetails[_electionID].candidateAddress.push(addr);
