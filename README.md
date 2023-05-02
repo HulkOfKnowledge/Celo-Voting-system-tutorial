@@ -7,19 +7,21 @@ Building Trust in Democracy: A Comprehensive Guide to Creating and Deploying a S
 ===
 
 ## Table Of Content
-[Introduction](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#introduction)
-[Prerequisites](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#prerequisites)
-[Requirements](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#requirements)
-[Understanding Smart Contract and Celo Testnet Blockchain](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#understanding-smart-contract-and-celo-testnet-blockchain)
-[Designing the Smart Contract Voting System](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#designing-the-smart-contract-voting-system)
-    -[Variables and Structs](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#variables-and-structs)
-    -[Mappings](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#mappings)
-    -[Modifiers](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#modifiers)
-    -[Events](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#events)
-    -[Functions](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#functions)
-    -[Overview of the Smart Contract Voting system Attempt](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#overview-of-the-smart-contract-voting-system-attempt)
- [Deploying the Smart Contract Voting System on Celo Testnet Blockchain](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#deploying-the-smart-contract-voting-system-on-celo-testnet-blockchain)
- [Conclusion](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#conclusion)
+* [Introduction](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#introduction)
+* [Prerequisites](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#prerequisites)
+* [Requirements](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#requirements)
+* [Understanding Smart Contract and Celo Testnet Blockchain](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#understanding-smart-contract-and-celo-testnet-blockchain)
+* [Designing the Smart Contract Voting System](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#designing-the-smart-contract-voting-system)
+    * [Variables and Structs](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#variables-and-structs)
+    * [Mappings](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#mappings)
+    * [Modifiers](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#modifiers)
+    * [Events](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#events)
+    * [Functions](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#functions)
+    * [Overview of the Smart Contract Voting system Attempt](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#overview-of-the-smart-contract-voting-system-attempt)
+*  [Deploying the Smart Contract Voting System on Celo Testnet Blockchain](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#deploying-the-smart-contract-voting-system-on-celo-testnet-blockchain)
+*  [Conclusion](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#conclusion)
+
+
 
 
 
