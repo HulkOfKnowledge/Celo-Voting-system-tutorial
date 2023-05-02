@@ -8,7 +8,6 @@ Building Trust in Democracy: A Comprehensive Guide to Creating and Deploying a S
 
 
 
-[TOC]
 
 
 
@@ -869,6 +868,8 @@ contract VotingSystemAttempt{
 }
 ```
 
+Full Code Below
+https://user-images.githubusercontent.com/92434749/235715085-eedfdc96-6226-4667-84ca-487d3b1fde91.mp4
 
 
 ## Deploying the Smart Contract Voting System on Celo Testnet Blockchain
@@ -904,6 +905,11 @@ To deploy using the celo Testnet and metamask, follow the steps below:
 
 1. You should now see the Celo Alfajores Testnet option in the network dropdown at the top of your MetaMask extension. Select it to switch to the Alfajores Testnet network.
 
+
+https://user-images.githubusercontent.com/92434749/235715417-8fe2840f-13b9-4372-a319-10684ba7734c.mp4
+
+
+
 1. With your metamask on the Celo testnet, go back to remix Ide,complie and deploy using `Injected Provider-metamask`
     ###### You might need some test funds to cover the gas fee of deployment. You can use the Celo Alfajores faucet to get some testnet funds for your Celo wallet. Here's the link to the faucet: https://faucet.celo.org/alfajores   .Copy your Celo Alfajores Testnet address from metamask and paste in the field `Account Address`.Check Metamask and you should see 1CELO has been sent to your wallet. 
 
@@ -914,6 +920,8 @@ With our Metamask connected to Celo Alfajores Testnet, we can then deploy from r
 ![](https://i.imgur.com/NTIsg8A.png)
 
 
+
+https://user-images.githubusercontent.com/92434749/235715511-0b13c4cc-33c8-46c0-afe3-376a6e4d2521.mp4
 
 
 
