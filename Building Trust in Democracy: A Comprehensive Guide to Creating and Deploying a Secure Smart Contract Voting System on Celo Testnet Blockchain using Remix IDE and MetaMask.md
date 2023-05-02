@@ -3,51 +3,44 @@ title: 'Building Trust in Democracy: A Comprehensive Guide to Creating and Deplo
 disqus: hackmd
 ---
 
-Building Trust in Democracy: A Comprehensive Guide to Creating and Deploying a Secure Smart Contract Voting System on Celo Testnet Blockchain using Remix IDE and MetaMask
+Building Trust in Democracy: A Comprehensive Guide for Creating & Deploying a Secure Smart Contract Voting System on Celo Testnet Blockchain using Remix IDE and MetaMask:
 ===
 
 
+## Introduction:
 
-[TOC]
+The democratic process is the cornerstone of modern societies, and it is essential to ensure its fairness, transparency, and security. However, traditional voting systems are susceptible to fraud, hacking, and other forms of manipulation, leading to a loss of trust in the democratic system. Smart contract-based voting systems built on blockchain technology offers promising solution to these challenges by providing a transparent and secure way of conducting elections.
 
+In this tutorial, we will walk through the process of creating and deploying a secure Smart Contract voting system on Celo Testnet blockchain using remix IDE and MetaMask. Celo is a fast-growing blockchain platform that focuses on making decentralized finance (DeFi) accessible to everyone. Celo's robust infrastructure and user-friendly environment make it an ideal platform for building decentralized applications, including voting systems.
 
+First, we will introduce you to the concept of Smart Contracts and blockchain technology. We will explain how Smart Contracts works and how they can be used to build secure and transparent voting systems. Then, we will dive into the Celo Testnet blockchain platform, which provides a sandbox environment for developers to test and deploy their Smart Contracts.
 
-## Introduction
+Next, we will guide you through the process of designing a Smart Contract-based voting system using Solidity, a programming language on the Ethereum blockchain. We will explain the key components of a voting system, including the voter registration process, ballot creation, and vote counting. We will also provide examples of Smart Contract code for each component, making it easy for you to follow along.
 
-The democratic process is the cornerstone of modern societies, and it is essential to ensure its fairness, transparency, and security. However, traditional voting systems are susceptible to fraud, hacking, and other forms of manipulation, leading to a loss of trust in the democratic process. Smart contract-based voting systems built on blockchain technology offer a promising solution to these challenges by providing a transparent and secure way of conducting elections.
+Once we have designed the Smart Contract voting system, we will move on to testing it on the Celo Testnet blockchain. Testing is a critical step in the development process as it ensures that the system works as intended and that there are no vulnerabilities that can be exploited by malicious actors.
 
-In this tutorial, we will walk through the process of creating and deploying a secure smart contract voting system on Celo Testnet blockchain using remix IDE and MetaMask. Celo is a fast-growing blockchain platform that focuses on making decentralized finance (DeFi) accessible to everyone. Celo's robust infrastructure and user-friendly environment make it an ideal platform for building decentralized applications, including voting systems.
-
-First, we will introduce you to the concept of smart contracts and blockchain technology. We will explain how smart contracts work and how they can be used to build secure and transparent voting systems. Then, we will dive into the Celo Testnet blockchain platform, which provides a sandbox environment for developers to test and deploy their smart contracts.
-
-Next, we will guide you through the process of designing a smart contract-based voting system using Solidity, a programming language used for writing smart contracts on the Ethereum blockchain. We will explain the key components of a voting system, including the voter registration process, ballot creation, and vote counting. We will also provide examples of smart contract code for each component, making it easy for you to follow along.
-
-Once we have designed the smart contract voting system, we will move on to testing it on the Celo Testnet blockchain. Testing is a critical step in the development process as it ensures that the system works as intended and that there are no vulnerabilities that can be exploited by malicious actors.
-
-Finally, we will guide you through the process of deploying the smart contract voting system on the Celo Testnet blockchain. We will explain the steps involved in deploying a smart contract and how to interact with it using a web-based interface.
-
+Finally, we will guide you through the process of deploying the Smart Contract voting system on the Celo Testnet blockchain. We will explain the steps involved in deploying a smart contract and how to interact with it using a web-based interface.
 
 By the end of this guide, you will have the skills and knowledge necessary to create and deploy a secure smart contract voting system on Celo Testnet blockchain. You will also be equipped with best practices for ensuring the security and transparency of your voting system, making it a trustworthy solution for conducting fair and transparent elections.
 
-Prerequisites
+Pre-requisites:
 ---
-1. Basic knowledge of programming with Solidity
-2. Basic knowledge of how to use the Remix IDE
+1. Basic knowledge of [Solidity](https://sourceforge.net/projects/solidity.mirror/)
+2. Basic knowledge of [Remix IDE](https://remix.ethereum.org/#lang=en&optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.18+commit.87f61d96.js)
 
-Requirements
+Requirements:
 ---
+1. Install [Metamask wallet](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
 
-* Have the metamask extension wallet installed on your browser.
-
-Understanding Smart Contract and Celo Testnet Blockchain
+Understanding Smart Contract and Celo Testnet Blockchain:
 ---
-Before we delve into designing and deploying a secure smart contract voting system on Celo Testnet Blockchain, it is important to have a clear understanding of what smart contracts and Celo Testnet Blockchain are.
+Before we delve into designing and deploying a secure Smart Contract voting system on Celo Testnet Blockchain, it is important to have a clear understanding of what Smart Contracts and Celo Testnet Blockchain are.
 
-* Smart contracts are self-executing computer programs that automatically enforce the terms of a contract. These contracts are written in code and are deployed on a blockchain network. Once the conditions set out in the contract are met, the smart contract executes the predetermined actions without the need for intermediaries.
+* The Smart contracts are self-executing computer programs that automatically enforce the terms of a contract. These contracts are written in code and are deployed on a blockchain network. Once the conditions set out in the contract are met, the smart contract executes the predetermined actions without the need for intermediaries.
 
-* Celo Testnet Blockchain, on the other hand, is a blockchain network designed specifically for mobile devices. It is built on top of the Ethereum blockchain and uses the same consensus algorithm as Ethereum, Proof of Work (PoW). However, Celo has implemented its own proof of stake consensus mechanism, which allows for faster and more cost-effective transactions.
+* Celo Testnet Blockchain, on the other hand, is a blockchain network designed specifically for mobile devices. It is built on top of the Ethereum blockchain and uses the same consensus algorithm as Ethereum, Proof of Work (PoW). However, Celo has implemented its own Proof of Stake (PoS) consensus mechanism, which allows for faster and more cost-effective transactions.
 
-    The Celo Testnet Blockchain provides a secure and decentralized environment for deploying smart contracts. It has a built-in wallet, which allows users to store and manage their digital assets, including Celo native tokens (CELO) and Celo Dollar stablecoin (cUSD). The Celo Testnet Blockchain also supports a variety of programming languages, including Solidity, which is the programming language used to develop Ethereum-based smart contracts.
+    The Celo Testnet Blockchain provides a secure and decentralized environment for deploying Smart Contracts. It has a built-in wallet, which allows users to store and manage their digital assets, including Celo native tokens (CELO) and Celo Dollar stablecoin (cUSD). The Celo Testnet Blockchain also supports a variety of programming languages, like Solidity, which is the programming language used to develop Ethereum-based smart contracts.
 
 In order to interact with the Celo Testnet Blockchain and deploy smart contracts, you will need to use a development environment such as Remix IDE and a wallet such as MetaMask.
 
@@ -56,19 +49,17 @@ In order to interact with the Celo Testnet Blockchain and deploy smart contracts
 * [MetaMask](https://metamask.io/), on the other hand, is a browser extension that allows you to interact with Ethereum-based blockchains, including Celo Testnet Blockchain. It acts as a wallet and allows you to manage your digital assets and sign transactions on the blockchain.
 
 
-
-
-Designing the Smart Contract Voting System
+Designing the Smart Contract Voting System:
 ---
 
-To begin, the first step in designing the smart contract voting system is to identify the requirements of the voting process. This includes understanding the voting rules, the number of participants, and the type of votes that will be cast. Once these requirements are established, the design process can begin.
+To begin, the first step in designing the Smart Contract voting system is to identify the requirements of the voting process. This includes understanding the voting rules, the number of participants, and the type of votes that will be cast. Once these requirements are established, the design process can begin.
 
-We will design a smart contract for a voting system using [Remix IDE](https://remix.ethereum.org/), which can be accessed using this link: https://remix.ethereum.org/
+We will design a Smart Contract for a voting system using [Remix IDE](https://remix.ethereum.org/), which can be accessed using this link: https://remix.ethereum.org/
 
-The smart contract which we will call **`VotingSystemAttempt`** will be responsible for managing the registration of voters, candidates, and conducting the election.
+The Smart Contract which we will call **`VotingSystemAttempt`** will be responsible for managing the registration of voters, candidates, and conducting the election.
 
-### Variables and Structs
-The smart contract voting system will consist of the following components:
+### Variables and Structs:
+The Smart Contract voting system will consist of the following components:
 
 1. *Chairperson*: The person who deploys the smart contract and is responsible for managing the election process.
 
@@ -76,7 +67,7 @@ The smart contract voting system will consist of the following components:
 
 3. *Candidates*: Individuals who are running for election. Each candidate will have a party they belong to.
 
-4. Elections: Each election will have a unique ID, an election type,an election stage(ie. registration,voting, end of election), a start and end time, and a list of eligible voters and candidates, total number of votes cast, total number of winning votes,address of the winner and party the winner belongs to.
+4. *Elections*: Each election will have a unique ID, an election type, an election stage(ie. registration,voting, end of election), a start and end time, a list of eligible voters and candidates, total number of votes cast, total number of winning votes, address of the winner & party the winner belongs to.
     * We use the `enum` keyword to define the `ElectionType`,`ElectionStage` and `Party`
     
         *Enum is a user-defined data type that is used to define a set of named values. Each value in an enum is represented by a unique integer that starts at 0 for the first value and increments by 1 for each subsequent value. Enums are often used to represent options or states in a contract.*
@@ -91,21 +82,19 @@ The smart contract voting system will consist of the following components:
     *`Struct` is another user-defined data type that is used to define a collection of variables of different types. Structs are often used to group related data together into a single object.*
 
 ###### For example, the following  code defines a struct called Candidate with three fields:
-    struct Candidate {
-        string name;
-        address addr;
-        Party party;
-    }`
+  struct Candidate {
+    string name; // Name of the candidate
+    address addr; // Address of the candidate
+    Party party; // Party of the candidate
+}
 
 Our smart contract will also have the following functionalities:
 
-* Election Registration: Before the election starts, the smart contract should allow the chairperson to set up an election by providing the election type and the duration of the election.
+* Election Registration: Before the election starts, the Smart Contract should allow the chairperson to set up an election by providing the election type and the duration of the election.
 
-* Voter Registration: Only eligible voters can participate in the election. Therefore, we need to have a voter registration process where voters can register themselves by providing their name and Ethereum wallet address. The smart contract will maintain a list of eligible voters.
+* Voter Registration: Only eligible voters can participate in the election. Therefore, we need to have a voter registration process where voters can register themselves by providing their name and Ethereum wallet address. The Smart Contract will maintain a list of eligible voters.
 
 * Candidate Registration: Candidates should also register themselves for the election. Candidates should provide their name, Ethereum wallet address, and the political party they are representing. The smart contract will maintain a list of eligible candidates.
-
-
 
 * Start Election: After the election has been set up, the smart contract will allow the chairperson to start the election.
 
@@ -122,59 +111,58 @@ Applying these concepts in solidity, we have the sample below:
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract VotingSystemAttempt{
-
+contract VotingSystemAttempt {
+    // Enums to represent different types of elections, stages, and parties
     enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS}
     enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION}
-    enum Party {APV,PVP,LV,PDAPC,NONE}
+    enum Party {APV, PVP, LV, PDAPC, NONE}
 
-    address chairPerson;
+    address chairPerson; // Address of the chairperson
 
-
-    constructor(){
-        chairPerson = msg.sender;
+    constructor() {
+        chairPerson = msg.sender; // Set the chairperson address as the contract deployer
     }
 
-    struct Candidate{
-        string name;
-        address addr;
-        Party party;
+    struct Candidate {
+        string name; // Name of the candidate
+        address addr; // Address of the candidate
+        Party party; // Party of the candidate
     }
 
-    struct Voter{
-        string name;
-        address addr;
+    struct Voter {
+        string name; // Name of the voter
+        address addr; // Address of the voter
     }
 
-    struct Election{
-        uint electionID;
-        ElectionType electionType;
-        ElectionStage electionStage;
-        address[] candidateAddress;
-        uint[] candidateVotes;
-        address winner;
-        Party winnerParty;
-        uint totalVotes;
-        uint numOfWinningVotes;
-        uint256 startTime;
-        uint256 endTime;
+    struct Election {
+        uint electionID; // ID of the election
+        ElectionType electionType; // Type of the election
+        ElectionStage electionStage; // Stage of the election
+        address[] candidateAddress; // Array of addresses of candidates
+        uint[] candidateVotes; // Array of votes received by each candidate
+        address winner; // Address of the winner
+        Party winnerParty; // Party of the winner
+        uint totalVotes; // Total number of votes cast
+        uint numOfWinningVotes; // Number of votes received by the winner
+        uint256 startTime; // Start time of the election
+        uint256 endTime; // End time of the election
     }
+}
+
 ```
 ###### DISCLAIMER: THE EXAMPLES USED IN THIS TUTORIAL ARE PURELY FICTIONAL AND HAS NOTHING TO DO WITH ANY POLITICAL PARTY OR PERSONNEL
 
-### Mappings
+### Mappings:
 Up next, we need to handle the following issues:
-1.     Storing and accessing each voter's detail
-1.     storing  and accessing each candidate's detail
-1.     storing and accessing each election's details
-1.     Keeping track of IDs used in previous elections
-1.     Keeping track of eligible voters for a particular election
-1.     Keeping track of eligible candidates for a particular election
-1.     Keeping track of eligible voters who have voted already.
+1.     Store & access each voter's detail.
+1.     Store & access each candidate's detail.
+1.     Store & access each election's details.
+1.     Keep track of IDs used in previous elections.
+1.     Keep track of eligible voters for a particular election.
+1.     Keep track of eligible candidates for a particular election.
+1.     Keep track of eligible voters who have voted already.
 
-Inorder to handle the above issues, we employ the use of `mappings` in solidity.
-
-
+In order to handle the above issues, we employ the use of `mappings` in solidity.
 
 ###### In Solidity, mappings are a way to store key-value pairs, where the keys can be of any data type except mappings, and the values can be of any data type, including other mappings.
 
@@ -186,27 +174,45 @@ Inorder to handle the above issues, we employ the use of `mappings` in solidity.
 
 ###### In this example, we define a mapping called myMapping that maps uint keys to string values. The public keyword makes the mapping accessible from outside the contract. Mappings can also be used in more complex data structures. For example, here is a mapping that maps a uint ID to a struct representing a person:
 
-`struct Person {
-    string name;
-    uint age;
-}`
+`
+// Struct to represent a person
+struct Person {
+    string name; // Name of the person
+    uint age; // Age of the person
+}
 
-`mapping (uint => Person) public people;`
+// Mapping from an ID to a person
+mapping (uint => Person) public people;
 
-In this example, we define a mapping called `people` that maps `uint` keys to `Person` struct values. The `Person` struct contains a name field of type string and an age field of type uint.
+`
+In this example, we defined a mapping called `people` that maps `uint` keys to `Person` struct values. The `Person` struct contains a name field of type string and an age field of type uint.
 
 Mappings can be declared as public, private, or internal and can also be nested within other mappings or data structures. It is important to note that mappings do not have a fixed length and can grow dynamically as data is added to them.
 
 Applying this knowledge to our voting system,we obtain the following lines of code:
 
 ```code=
-    mapping(uint => bool) private usedIDs;
-    mapping (address=>Voter) voterDetails;
-    mapping (address=>Candidate) candidateDetails;
-    mapping (uint=>Election) electionDetails;
-    mapping(uint => mapping(address => bool)) isEligibleVoter; 
-    mapping(uint => mapping(address => bool)) isEligibleCandidate;
-    mapping(uint => mapping (address=>bool)) hasVoted;
+  // Mapping from ID to boolean to keep track of used IDs
+mapping(uint => bool) private usedIDs;
+
+// Mapping from address to Voter struct to store voter details
+mapping (address=>Voter) voterDetails;
+
+// Mapping from address to Candidate struct to store candidate details
+mapping (address=>Candidate) candidateDetails;
+
+// Mapping from election ID to Election struct to store election details
+mapping (uint=>Election) electionDetails;
+
+// Mapping from election ID to another mapping from address to boolean to check if a voter is eligible to vote
+mapping(uint => mapping(address => bool)) isEligibleVoter; 
+
+// Mapping from election ID to another mapping from address to boolean to check if a candidate is eligible to participate
+mapping(uint => mapping(address => bool)) isEligibleCandidate;
+
+// Mapping from election ID to another mapping from address to boolean to check if a voter has voted in the election
+mapping(uint => mapping (address=>bool)) hasVoted;
+
 ```
 
 #### Explanation:
@@ -226,7 +232,7 @@ Applying this knowledge to our voting system,we obtain the following lines of co
 * `mapping(uint => mapping (address=>bool)) hasVoted`: This mapping is used to keep track of which voters have already cast their vote in each election, where the outer key is the election ID and the inner key is the voter's address.
 
 
-### Modifiers
+### Modifiers:
 
 In Solidity, modifiers are special functions that can be used to modify the behavior of other functions. They are typically used to add additional requirements or conditions that must be met before a function can be executed.
 
@@ -241,38 +247,43 @@ modifier onlyOwner {
 }
 ```
 
-In this example, onlyOwner is the name of the modifier. It contains a require statement that checks if the sender of the transaction is the owner of the contract. If the sender is not the owner, the modifier will throw an exception and the function code will not be executed. If the sender is the owner, the _ symbol indicates where the function code should be executed.
+In this example, `onlyOwner` is the name of the modifier. It contains a require statement that checks if the sender of the transaction is the owner of the contract. If the sender is not the owner, the modifier will throw an exception and the function code will not be executed. If the sender is the owner, the _ symbol indicates where the function code should be executed.
 
 Modifiers can be used to add other conditions as well, such as checking if a certain value has been reached, or if a certain time period has passed. By using modifiers, developers can add additional security and validation to their contracts, making them more robust and reliable.
 
 For Our Voting System , we will employ the following the modifiers:
 
 ```code=
-    modifier chairpersonOnly(){
-        require(msg.sender==chairPerson,"ACCESS DENIED: Only the ChairPerson can call this fuction");
-        _;
-    }
+   // This modifier restricts the function access to only the ChairPerson
+modifier chairpersonOnly(){
+require(msg.sender==chairPerson,"ACCESS DENIED: Only the ChairPerson can call this function");
+_;
+}
 
-    modifier eligibleVoter(uint id,address addr){
-        require(isEligibleVoter[id][addr],"ACTION DENIED: Only eligible voters are permitted ");
-        _;
-    }
-    
-    modifier eligibleCandidate(uint id,address addr){
-        require(isEligibleCandidate[id][addr],"ACTION DENIED: Only eligible candidates are permitted ");
-        _;
-    }
+// This modifier checks if the voter is eligible to vote in a particular election
+modifier eligibleVoter(uint id,address addr){
+require(isEligibleVoter[id][addr],"ACTION DENIED: Only eligible voters are permitted ");
+_;
+}
 
-    modifier startedElection(uint _electionID){
-        require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started" );
-        require(electionDetails[_electionID].startTime>0,"ERROR: Election has not started");
-        _;
-    }
+// This modifier checks if the candidate is eligible to participate in a particular election
+modifier eligibleCandidate(uint id,address addr){
+require(isEligibleCandidate[id][addr],"ACTION DENIED: Only eligible candidates are permitted ");
+_;
+}
 
-    modifier  beforeDeadline(uint _electionID){
-        require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
-        _;
-    }
+// This modifier checks if an election has started
+modifier startedElection(uint _electionID){
+require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started" );
+require(electionDetails[_electionID].startTime>0,"ERROR: Election has not started");
+_;
+}
+
+// This modifier checks if the deadline for an election has not passed
+modifier beforeDeadline(uint _electionID){
+require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
+_;
+}
 ```
 #### Explanation:
 * `chairpersonOnly`: This modifier checks whether the caller of the function is the ChairPerson or not. If the caller is not the ChairPerson, then the function call is rejected with an error message.
@@ -285,57 +296,71 @@ For Our Voting System , we will employ the following the modifiers:
 
 * `beforeDeadline`: This modifier checks whether the current time is before the election deadline or not. If the current time is after the deadline, then the function call is rejected with an error message
 
-### Events
+### Events:
 Events are a way for contracts to communicate that something has happened on the blockchain. Events are defined using the `event` keyword followed by the name of the event and its parameters (if any).
 
 ```code! 
 pragma solidity ^0.8.0;
 
 contract MyContract {
-  event NewPersonAdded(string name, uint age);
+  event NewPersonAdded(string name, uint age); // define an event to emit when a new person is added
   
   function addPerson(string memory _name, uint _age) public {
     // add person to the contract
-    emit NewPersonAdded(_name, _age); // emit the event
+    emit NewPersonAdded(_name, _age); // emit the event with the person's name and age
   }
 }
+
 ```
 In this example, we've defined an `event` called NewPersonAdded with two parameters: name of type string and age of type uint. Whenever a new person is added to the contract using the addPerson function, the NewPersonAdded event is `emitted` with the person's name and age as parameters.
 
-Events are useful for notifying external applications of changes that occur within a contract. For example, a web application can listen for events emitted by a contract and update its user interface accordingly. Events are also used for debugging and auditing purposes, as they provide a permanent record of all state changes that occur within a contract.
+Events are useful for notifying external applications of changes that occur within a contract. For ex, a web application can listen for events emitted by a contract and update its user interface accordingly. Events are also used for debugging and auditing purposes, as they provide a permanent record of all state changes that occur within a contract.
 
 In the case of our voting system attempt,we will define the following events:
 
 ```code=
+// Event emitted when registration for an election opens
 event RegistrationOpen(
-    uint _electionID
+uint _electionID
 );
+
+// Event emitted when a voter is registered
 event VoterRegistered(
-    string _name,
-    address _addr
+string _name,
+address _addr
 );
+
+// Event emitted when a candidate is registered
 event CandidateRegistered(
-    string _name, 
-    address _addr, 
-    Party _party
+string _name,
+address _addr,
+Party _party
 );
+
+// Event emitted when registration for an election closes
 event RegistrationClosed(
-    uint _electionID, 
-    ElectionType _electionType
+uint _electionID,
+ElectionType _electionType
 );
+
+// Event emitted when an election starts
 event StartElection(
-    uint _electionID, 
-    ElectionType _electionType
+uint _electionID,
+ElectionType _electionType
 );
+
+// Event emitted when an election ends
 event EndElection(
-    uint _electionID, 
-    ElectionType _electionType
+uint _electionID,
+ElectionType _electionType
 );
+
+// Event emitted when the result for a candidate is logged
 event LogCandidateResult(
-    string candidateName, 
-    address candidateAddress,
-    Party candidateParty,
-    uint votes
+string candidateName,
+address candidateAddress,
+Party candidateParty,
+uint votes
 );
 ```
 
@@ -355,7 +380,7 @@ event LogCandidateResult(
 * `LogCandidateResult`: This event is emitted when the result of an election is announced. It takes four parameters, candidateName, candidateAddress, candidateParty, and votes, which are the name, address, party, and number of votes of the candidate, respectively.
 
 
-### Functions
+### Functions:
 First we will work on the `allowElectionRegistration` function
 
 ```code=
@@ -410,25 +435,44 @@ function registerVoter(
 Next, we will work on the `registerCandidate` function
 
 ```code=
+/**
+ * @dev Registers a candidate for a particular election
+ * @param _electionID The ID of the election for which the candidate is registering
+ * @param _name The name of the candidate
+ * @param addr The address of the candidate
+ * @param _party The party of the candidate
+ */
 function registerCandidate(
-        uint _electionID,
-        string memory _name,
-        address addr,
-        Party _party
-    )
-    public chairpersonOnly{
-        require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
-        require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
+    uint _electionID,
+    string memory _name,
+    address addr,
+    Party _party
+)
+public chairpersonOnly{
 
-        candidateDetails[addr]= Candidate(_name,addr,_party);
-        electionDetails[_electionID].candidateAddress.push(addr);
-        electionDetails[_electionID].candidateVotes.push(0);
+    // Check if the election ID exists
+    require(usedIDs[_electionID], "ERROR: Election ID does not exist");
 
-        isEligibleCandidate[_electionID][addr]=true;
+    // Check if the registration is currently open
+    require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
 
-        emit CandidateRegistered(_name, addr, _party);
-    }
+    // Check if the candidate has not already been registered for this election
+    require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
+
+    // Add candidate details to the candidateDetails mapping
+    candidateDetails[addr]= Candidate(_name,addr,_party);
+
+    // Add candidate address and votes to the electionDetails mapping
+    electionDetails[_electionID].candidateAddress.push(addr);
+    electionDetails[_electionID].candidateVotes.push(0);
+
+    // Mark the candidate as eligible for this election
+    isEligibleCandidate[_electionID][addr]=true;
+
+    // Emit an event to notify that a candidate has been registered
+    emit CandidateRegistered(_name, addr, _party);
+}
+
 ```
 
 ###### Explanation:
@@ -447,30 +491,43 @@ function registerCandidate(
 
 After registration of candidates and voters, the next function is to `initiateElectionData`. Here, we initialize the requirements of the election.
 ```code=
- function initiateElectionData(
-        uint _electionID,
-        ElectionType _electionType,
-        uint _duration 
-    )
-    public chairpersonOnly{
-        require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Initiated already");
-        require(electionDetails[_electionID].candidateAddress.length > 1,"ERROR: At least 2 candidates are needed");
-        
-        
-        usedIDs[_electionID]=true;
+ /**
+ * @dev Initializes the election data for a particular election
+ * @param _electionID The ID of the election to initialize
+ * @param _electionType The type of election (e.g. presidential, senatorial)
+ * @param _duration The duration of the election in seconds
+ */
+function initiateElectionData(
+    uint _electionID,
+    ElectionType _electionType,
+    uint _duration 
+)
+public chairpersonOnly{
 
-        electionDetails[_electionID].electionID=_electionID;
-        electionDetails[_electionID].electionType=_electionType;
-        electionDetails[_electionID].winner= address(0);
-        electionDetails[_electionID].winnerParty= Party.NONE;
-        electionDetails[_electionID].totalVotes=0;
-        electionDetails[_electionID].numOfWinningVotes=0;
-        electionDetails[_electionID].startTime=block.timestamp;
-        electionDetails[_electionID].endTime=electionDetails[_electionID].startTime+_duration;
-        electionDetails[_electionID].electionStage=ElectionStage.START_ELECTION;
+    // Check if the election ID exists
+    require(usedIDs[_electionID], "ERROR: Election ID does not exist");
 
-    }
+    // Check if the election has not already been initiated
+    require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Initiated already");
+
+    // Check if there are at least 2 candidates registered for this election
+    require(electionDetails[_electionID].candidateAddress.length > 1,"ERROR: At least 2 candidates are needed");
+        
+    // Mark the election ID as used
+    usedIDs[_electionID]=true;
+
+    // Set the properties of the election in the electionDetails mapping
+    electionDetails[_electionID].electionID=_electionID;
+    electionDetails[_electionID].electionType=_electionType;
+    electionDetails[_electionID].winner= address(0);
+    electionDetails[_electionID].winnerParty= Party.NONE;
+    electionDetails[_electionID].totalVotes=0;
+    electionDetails[_electionID].numOfWinningVotes=0;
+    electionDetails[_electionID].startTime=block.timestamp;
+    electionDetails[_electionID].endTime=electionDetails[_electionID].startTime+_duration;
+    electionDetails[_electionID].electionStage=ElectionStage.START_ELECTION;
+}
+
 ```
 ###### Explanation:
 ######  It takes in three arguments:
@@ -487,22 +544,36 @@ After registration of candidates and voters, the next function is to `initiateEl
 
 Time to work on the all important function; the `vote` function.
 ```code=
+/**
+ * @dev Allows an eligible voter to cast their vote for a candidate in a given election
+ * @param _electionID The ID of the election in which the voter wants to vote
+ * @param candidateAddr The address of the candidate the voter is voting for
+ */
 function vote(
-        uint _electionID,
-        address candidateAddr
-    )
-    public
-    startedElection(_electionID) beforeDeadline(_electionID)
-    eligibleVoter(_electionID,msg.sender) eligibleCandidate(_electionID,candidateAddr)
-    {
-        require(!hasVoted[_electionID][msg.sender],"ERROR: You have voted already!");
-        (bool candidateFound, int candidateIndex) = findCandidateIndex(electionDetails[_electionID], candidateAddr);
-        require(candidateFound, "ERROR: Candidate not found in election");
+    uint _electionID,
+    address candidateAddr
+)
+public
+startedElection(_electionID) beforeDeadline(_electionID)
+eligibleVoter(_electionID,msg.sender) eligibleCandidate(_electionID,candidateAddr)
+{
+    // Make sure that the voter has not already cast their vote in this election
+    require(!hasVoted[_electionID][msg.sender],"ERROR: You have voted already!");
 
-        electionDetails[_electionID].candidateVotes[uint(candidateIndex)]++;
-        electionDetails[_electionID].totalVotes++;
-        hasVoted[_electionID][msg.sender]=true;
-    }
+    // Find the index of the candidate in the candidateAddress array
+    (bool candidateFound, int candidateIndex) = findCandidateIndex(electionDetails[_electionID], candidateAddr);
+
+    // Make sure that the candidate is registered for this election
+    require(candidateFound, "ERROR: Candidate not found in election");
+
+    // Increment the number of votes for the candidate and the total number of votes
+    electionDetails[_electionID].candidateVotes[uint(candidateIndex)]++;
+    electionDetails[_electionID].totalVotes++;
+
+    // Mark the voter as having voted in this election
+    hasVoted[_electionID][msg.sender]=true;
+}
+
 ```
 
 ###### Explanation:
@@ -524,13 +595,23 @@ function vote(
 
 
 Another important functionality to be implemented is the `endElection` 
-```code=
- function endElection(uint _electionID)
-    public chairpersonOnly{
-        require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(block.timestamp >= electionDetails[_electionID].endTime,"ERROR: Election Deadline has not been met!");
-        electionDetails[_electionID].electionStage = ElectionStage.END_ELECTION;
-    }
+```
+/**
+ * @dev Ends an election with the given ID if the election deadline has passed
+ * @param _electionID The ID of the election to be ended
+ */
+function endElection(uint _electionID)
+public chairpersonOnly{
+    // Make sure that the election ID is valid
+    require(usedIDs[_electionID], "ERROR: Election ID does not exist");
+
+    // Make sure that the election deadline has passed
+    require(block.timestamp >= electionDetails[_electionID].endTime,"ERROR: Election Deadline has not been met!");
+
+    // Update the election stage to reflect that the election has ended
+    electionDetails[_electionID].electionStage = ElectionStage.END_ELECTION;
+}
+
 ```
 
 ###### Explanation:
@@ -547,14 +628,22 @@ Another important functionality to be implemented is the `endElection`
 Displaying the results at the end of the election naturally follows suit.
 
 ```code=
-    function displayResults(uint _electionID) public  chairpersonOnly {
+   // This function displays the results of an election with a given ID
+// It can only be called by the chairperson
+function displayResults(uint _electionID) public  chairpersonOnly {
+    // Check if the election ID exists
     require(usedIDs[_electionID], "ERROR: Election ID does not exist");
+
+    // Check if the election has ended
     require(electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION, "ERROR: Election has not ended");
     
+    // Get the number of candidates
     uint numCandidates = electionDetails[_electionID].candidateAddress.length;
+
+    // Create an array to store the votes for each candidate
     uint[] memory votes = new uint[](numCandidates);
 
-    // sort candidates in descending order of votes
+    // Sort the candidates in descending order of votes using a bubble sort algorithm
     for (uint i = 0; i < numCandidates - 1; i++) {
         for (uint j = i + 1; j < numCandidates; j++) {
             if (votes[i] < votes[j]) {
@@ -565,7 +654,7 @@ Displaying the results at the end of the election naturally follows suit.
         }
     }
 
-    // display sorted candidates
+    // Display the sorted candidates along with their party, name and number of votes
     for (uint i = 0; i < numCandidates; i++) {
         address candidateAddress = electionDetails[_electionID].candidateAddress[i];
         uint candidateVotes = electionDetails[_electionID].candidateVotes[i];
@@ -574,6 +663,7 @@ Displaying the results at the end of the election naturally follows suit.
         emit LogCandidateResult(candidateName, candidateAddress, candidateParty, candidateVotes);
     }
 }
+
 ```
 ###### Explanation
 ###### It displays the results of an election with the given _electionID. It first checks that the election ID exists and that the election has ended. It then creates a new dynamic array votes with length equal to the number of candidates in the election.
@@ -586,106 +676,98 @@ Displaying the results at the end of the election naturally follows suit.
 The full code with slightly more functionalities is given below
 
 ```code!
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract VotingSystemAttempt{
+contract VotingSystemAttempt {
+  enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS}
+enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION}
+enum Party {APV, PVP, LV, PDAPC, NONE}
 
-    enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS}
-    enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION}
-    enum Party {APV,PVP,LV,PDAPC,NONE}
+address chairPerson;
 
-    address chairPerson;
+constructor() {
+    chairPerson = msg.sender;
+}
 
+struct Candidate {
+    string name;
+    address addr;
+    Party party;
+}
 
-    constructor(){
-        chairPerson = msg.sender;
-    }
+struct Voter {
+    string name;
+    address addr;
+}
 
-    struct Candidate{
-        string name;
-        address addr;
-        Party party;
-    }
+struct Election {
+    uint electionID;
+    ElectionType electionType;
+    ElectionStage electionStage;
+    address[] candidateAddress;
+    uint[] candidateVotes;
+    address winner;
+    Party winnerParty;
+    uint totalVotes;
+    uint numOfWinningVotes;
+    uint256 startTime;
+    uint256 endTime;
+}
 
-    struct Voter{
-        string name;
-        address addr;
-    }
+mapping(uint => bool) private usedIDs;
+mapping(address => Voter) voterDetails;
+mapping(address => Candidate) candidateDetails;
+mapping(uint => Election) electionDetails;
+mapping(uint => mapping(address => bool)) isEligibleVoter; 
+mapping(uint => mapping(address => bool)) isEligibleCandidate;
+mapping(uint => mapping(address => bool)) hasVoted;
 
-    struct Election{
-        uint electionID;
-        ElectionType electionType;
-        ElectionStage electionStage;
-        address[] candidateAddress;
-        uint[] candidateVotes;
-        address winner;
-        Party winnerParty;
-        uint totalVotes;
-        uint numOfWinningVotes;
-        uint256 startTime;
-        uint256 endTime;
-    }
+modifier chairpersonOnly() {
+    require(msg.sender == chairPerson, "ACCESS DENIED: Only the ChairPerson can call this function");
+    _;
+}
 
+modifier eligibleVoter(uint id, address addr) {
+    require(isEligibleVoter[id][addr], "ACTION DENIED: Only eligible voters are permitted ");
+    _;
+}
+
+modifier eligibleCandidate(uint id, address addr) {
+    require(isEligibleCandidate[id][addr], "ACTION DENIED: Only eligible candidates are permitted ");
+    _;
+}
+
+modifier startedElection(uint _electionID) {
+    require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started");
+    require(electionDetails[_electionID].startTime > 0, "ERROR: Election has not started");
+    _;
+}
+
+modifier beforeDeadline(uint _electionID) {
+    require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
+    _;
+}
+
+event RegistrationOpen(uint _electionID);
+event VoterRegistered(string _name, address _addr);
+event CandidateRegistered(string _name, address _addr, Party _party);
+event RegistrationClosed(uint _electionID, ElectionType _electionType);
+event StartElection(uint _electionID, ElectionType _electionType);
+event EndElection(uint _electionID, ElectionType _electionType);
+event LogCandidateResult(string candidateName, address candidateAddress, Party candidateParty, uint votes);
+
+function registerVoter(uint _electionID, string memory name, address addr) public chairpersonOnly {
+    require(usedIDs[_electionID], "ERROR: Election ID does not exist");
+    require(electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION, "ERROR: Registration is not Open");
+    require(isEligibleVoter[_electionID][addr] == false, "ERROR: Voter has already been registered");
     
-    mapping(uint => bool) private usedIDs;
-    mapping (address=>Voter) voterDetails;
-    mapping (address=>Candidate) candidateDetails;
-    mapping (uint=>Election) electionDetails;
-    mapping(uint => mapping(address => bool)) isEligibleVoter; 
-    mapping(uint => mapping(address => bool)) isEligibleCandidate;
-    mapping(uint => mapping (address=>bool)) hasVoted;
+    voterDetails[addr] = Voter(name, addr);
+    isEligibleVoter[_electionID][addr] = true;
 
-    modifier chairpersonOnly(){
-        require(msg.sender==chairPerson,"ACCESS DENIED: Only the ChairPerson can call this fuction");
-        _;
-    }
-
-    modifier eligibleVoter(uint id,address addr){
-        require(isEligibleVoter[id][addr],"ACTION DENIED: Only eligible voters are permitted ");
-        _;
-    }
-    
-    modifier eligibleCandidate(uint id,address addr){
-        require(isEligibleCandidate[id][addr],"ACTION DENIED: Only eligible candidates are permitted ");
-        _;
-    }
-
-    modifier startedElection(uint _electionID){
-        require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started" );
-        require(electionDetails[_electionID].startTime>0,"ERROR: Election has not started");
-        _;
-    }
-
-    modifier  beforeDeadline(uint _electionID){
-        require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
-        _;
-    }
-
-    event RegistrationOpen(uint _electionID);
-    event VoterRegistered(string _name,address _addr);
-    event CandidateRegistered(string _name, address _addr, Party _party);
-    event RegistrationClosed(uint _electionID, ElectionType _electionType);
-    event StartElection(uint _electionID, ElectionType _electionType);
-    event EndElection(uint _electionID, ElectionType _electionType);
-    event LogCandidateResult(string candidateName, address candidateAddress,Party candidateParty,uint votes);
-
-    function registerVoter(
-        uint _electionID,
-        string memory name,
-        address addr
-    )
-    public chairpersonOnly {
-        require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
-        require(isEligibleVoter[_electionID][addr]==false,"ERROR: Voter has already been registered");
-        
-        voterDetails[addr] = Voter(name,addr);
-        isEligibleVoter[_electionID][addr] = true;
-
-        emit VoterRegistered(name, addr);
-    }
+    emit VoterRegistered(name, addr);
+}
 
     function registerCandidate(
         uint _electionID,
@@ -728,7 +810,6 @@ contract VotingSystemAttempt{
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
         require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Initiated already");
         require(electionDetails[_electionID].candidateAddress.length > 1,"ERROR: At least 2 candidates are needed");
-        
         
         usedIDs[_electionID]=true;
 
@@ -846,8 +927,6 @@ contract VotingSystemAttempt{
     }
 }
 
-
-
     function transferChairperson(address newChairperson) public  {
         require(msg.sender == chairPerson, "ERROR: Only the current ChairPerson can transfer the role");
         require(newChairperson != address(0), "ERROR: Invalid address specified");
@@ -857,14 +936,14 @@ contract VotingSystemAttempt{
 }
 ```
 
-## Deploying the Smart Contract Voting System on Celo Testnet Blockchain
+## Deploying the Smart Contract Voting System on Celo Testnet Blockchain:
 ---
 
 To compile and deploy a smart contract on Remix IDE using its Virtual Machine, you need to follow these steps:
 
 1. Compile the code: In the "Solidity Compiler" tab, select the appropriate compiler version (any version >=0.7.0 but <0.9.0) and click "Compile" to compile your code.
 
-1. Deploy the contract: In the "Deploy & Run Transactions" tab, select the appropriate environment (e.g., JavaScript VM, or Custom RPC), and click "Deploy" to deploy your contract.
+2. Deploy the contract: In the "Deploy & Run Transactions" tab, select the appropriate environment (e.g., JavaScript VM, or Custom RPC), and click "Deploy" to deploy your contract.
 
 3. Interact with the contract: Once your contract is deployed, you can interact with it by calling its functions in the "Deployed Contracts" section on the right-hand side panel.
 
@@ -872,13 +951,13 @@ To deploy using the celo Testnet and metamask, follow the steps below:
 
 1. Open the MetaMask extension in your browser and click on your account avatar at the top right corner.
 
-1. From the dropdown menu, click on "Settings".
+2. From the dropdown menu, click on "Settings".
 
-1. In the Settings page, scroll down and click on "Networks".
+3. In the Settings page, scroll down and click on "Networks".
 
-1. Click on "Add Network" at the bottom of the networks list.
+4. Click on "Add Network" at the bottom of the networks list.
 
-1. Enter the following details for the new network:
+5. Enter the following details for the new network:
 
     *     Network Name: Celo Alfajores Testnet
     *     New RPC URL: https://alfajores-forno.celo-testnet.org
@@ -886,33 +965,23 @@ To deploy using the celo Testnet and metamask, follow the steps below:
     *     Symbol: CELO
     *     Block Explorer URL: https://alfajores-blockscout.celo-testnet.org/
 
-1. Click "Save" to add the network to MetaMask.
+6. Click "Save" to add the network to MetaMask.
 
-1. You should now see the Celo Alfajores Testnet option in the network dropdown at the top of your MetaMask extension. Select it to switch to the Alfajores Testnet network.
+7. You should now see the Celo Alfajores Testnet option in the network dropdown at the top of your MetaMask extension. Select it to switch to the Alfajores Testnet network.
 
-1. With your metamask on the Celo testnet, go back to remix Ide,complie and deploy using `Injected Provider-metamask`
+8. With your metamask on the Celo testnet, go back to remix Ide,complie and deploy using `Injected Provider-metamask`
     ###### You might need some test funds to cover the gas fee of deployment. You can use the Celo Alfajores faucet to get some testnet funds for your Celo wallet. Here's the link to the faucet: https://celo.org/developers/faucet 
 
+## Conclusion:
 
+Therefore, building trust in democracy is crucial for a well functioning society, and a secure Smart Contract voting system can be an effective solution. This comprehensive guide has provided step-by-step instructions for creating & deploying a secure Smart Contract voting system on the Celo Testnet Blockchain using Remix IDE and MetaMask. The included that Smart Contract defines the necessary data structures and functions to facilitate the election process, including voter and candidate registration, election initiation, vote counting, and winner determination.
 
+By implementing the features outlined in this tutorial, election administrators can ensure that only eligible voters and candidates participate in the election, and that the election is transparent and tamper-proof. Additionally, the Smart Contract's immutability ensures that the results of the election cannot be altered after the fact, further increasing trust in the election process.
 
-## Conclusion
+It is important to note that while the system presented in this tutorial can be effective, it is not a perfect solution. Potential vulnerabilities and attack vectors should always be considered and mitigated to the best of one's ability. Furthermore, while the Celo Testnet is a suitable platform for testing and experimentation, deploying a real-world Smart Contract voting system on a public blockchain requires careful consideration and expertise.
 
-In conclusion, building trust in democracy is crucial for a functioning society, and a secure smart contract voting system can be an effective solution. This comprehensive guide has provided step-by-step instructions for creating and deploying a secure smart contract voting system on the Celo Testnet Blockchain using Remix IDE and MetaMask. The included smart contract defines the necessary data structures and functions to facilitate the election process, including voter and candidate registration, election initiation, vote counting, and winner determination.
-
-By implementing the features outlined in this guide, election administrators can ensure that only eligible voters and candidates participate in the election, and that the election is transparent and tamper-proof. Additionally, the smart contract's immutability ensures that the results of the election cannot be altered after the fact, further increasing trust in the election process.
-
-It is important to note that while the system presented in this guide can be effective, it is not a perfect solution. Potential vulnerabilities and attack vectors should always be considered and mitigated to the best of one's ability. Furthermore, while the Celo Testnet is a suitable platform for testing and experimentation, deploying a real-world smart contract voting system on a public blockchain requires careful consideration and expertise.
-
-Overall, building trust in democracy is a complex and ongoing endeavor, but a secure smart contract voting system is a powerful tool that can help facilitate fair and transparent elections.
-
-
-
-
-
+Overall, building trust in democracy is a complex and ongoing endeavor, but a secure Smart Contract voting system is a powerful tool that can help facilitate fair and transparent elections.
 
 ---
-
-
 
 ###### tags: `CELO` `Solidity` `Blockchain` `Democracy` `Smart Contracts`
