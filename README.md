@@ -24,10 +24,6 @@ Building Trust in Democracy: A Comprehensive Guide to Creating and Deploying a S
 
 
 
-
-
-
-
 ## Introduction
 
 The democratic process is the cornerstone of modern societies, and it is essential to ensure its fairness, transparency, and security. However, traditional voting systems are susceptible to fraud, hacking, and other forms of manipulation, leading to a loss of trust in the democratic process. Smart contract-based voting systems built on blockchain technology offer a promising solution to these challenges by providing a transparent and secure way of conducting elections.
@@ -152,11 +148,11 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract VotingSystemAttempt{
 
-    enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS}
-    enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION}
-    enum Party {APV,PVP,LV,PDAPC,NONE}
+    enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS} //handles election type
+    enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION} //handles the different stages in the election
+    enum Party {APV,PVP,LV,PDAPC,NONE} //handles the different parties allowed
 
-    address chairPerson;
+    address chairPerson; // stores address of electoral chairman
 
 
     constructor(){
@@ -164,28 +160,28 @@ contract VotingSystemAttempt{
     }
 
     struct Candidate{
-        string name;
-        address addr;
-        Party party;
+        string name; // candidate name
+        address addr; // candidate address
+        Party party; // candidate party
     }
 
     struct Voter{
-        string name;
-        address addr;
+        string name; // voter name
+        address addr; // voter address
     }
 
     struct Election{
-        uint electionID;
-        ElectionType electionType;
-        ElectionStage electionStage;
-        address[] candidateAddress;
-        uint[] candidateVotes;
-        address winner;
-        Party winnerParty;
-        uint totalVotes;
-        uint numOfWinningVotes;
-        uint256 startTime;
-        uint256 endTime;
+        uint electionID; // stores election id, which should be unique
+        ElectionType electionType; // stores election type
+        ElectionStage electionStage; // stores election stage
+        address[] candidateAddress; // array of candidates by address
+        uint[] candidateVotes; // array of candidate's vote that corresponds to candidate address
+        address winner; // address of winner
+        Party winnerParty; // party of winner
+        uint totalVotes; // number of voters
+        uint numOfWinningVotes; // number of votes for the winner
+        uint256 startTime; // election start time
+        uint256 endTime; // election end time
     }
 ```
 ###### DISCLAIMER: THE EXAMPLES USED IN THIS TUTORIAL ARE PURELY FICTIONAL AND HAS NOTHING TO DO WITH ANY POLITICAL PARTY OR PERSONNEL
