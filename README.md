@@ -142,7 +142,7 @@ Applying these concepts in solidity, we have the sample below:
 
 
 ```code=
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.7.0 <0.9.0;
 
@@ -610,7 +610,7 @@ Displaying the results at the end of the election naturally follows suit.
 The full code with slightly more functionalities is given below
 
 ```code!
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.7.0 <0.9.0;
 
