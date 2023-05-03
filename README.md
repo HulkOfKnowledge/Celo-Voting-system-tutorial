@@ -224,12 +224,25 @@ Mappings can be declared as public, private, or internal and can also be nested 
 Applying this knowledge to our voting system,we obtain the following lines of code:
 
 ```code=
+    // Mapping to check if an election ID has been used
     mapping(uint => bool) private usedIDs;
+
+    // Mapping of voter details
     mapping (address=>Voter) voterDetails;
+
+    // Mapping of candidate details
     mapping (address=>Candidate) candidateDetails;
+
+    // Mapping of election details
     mapping (uint=>Election) electionDetails;
-    mapping(uint => mapping(address => bool)) isEligibleVoter; 
+
+    // Mapping of eligible voters for each election
+    mapping(uint => mapping(address => bool)) isEligibleVoter;
+
+    // Mapping of eligible candidates for each election
     mapping(uint => mapping(address => bool)) isEligibleCandidate;
+
+    // Mapping of voters who have already voted in an election
     mapping(uint => mapping (address=>bool)) hasVoted;
 ```
 
@@ -272,27 +285,37 @@ Modifiers can be used to add other conditions as well, such as checking if a cer
 For Our Voting System , we will employ the following the modifiers:
 
 ```code=
+    // Modifier to check if the caller is the Chairperson
     modifier chairpersonOnly(){
         require(msg.sender==chairPerson,"ACCESS DENIED: Only the ChairPerson can call this fuction");
         _;
     }
 
+    // Modifier to check if a voter is eligible to vote in an election
     modifier eligibleVoter(uint id,address addr){
         require(isEligibleVoter[id][addr],"ACTION DENIED: Only eligible voters are permitted ");
         _;
     }
     
+    // Modifier to check if a candidate is eligible to participate in an election
     modifier eligibleCandidate(uint id,address addr){
         require(isEligibleCandidate[id][addr],"ACTION DENIED: Only eligible candidates are permitted ");
         _;
     }
 
+    // Modifier to check if an election has started
     modifier startedElection(uint _electionID){
-        require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started" );
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION,
+             "ERROR: Election has not started"
+              );
+
         require(electionDetails[_electionID].startTime>0,"ERROR: Election has not started");
         _;
     }
 
+    // This modifier checks if the current time is before the election end time.
+    // It only allows the function to be executed if the current time is before the election end time.
     modifier  beforeDeadline(uint _electionID){
         require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
         _;
@@ -331,36 +354,26 @@ Events are useful for notifying external applications of changes that occur with
 In the case of our voting system attempt,we will define the following events:
 
 ```code=
-event RegistrationOpen(
-    uint _electionID
-);
-event VoterRegistered(
-    string _name,
-    address _addr
-);
-event CandidateRegistered(
-    string _name, 
-    address _addr, 
-    Party _party
-);
-event RegistrationClosed(
-    uint _electionID, 
-    ElectionType _electionType
-);
-event StartElection(
-    uint _electionID, 
-    ElectionType _electionType
-);
-event EndElection(
-    uint _electionID, 
-    ElectionType _electionType
-);
-event LogCandidateResult(
-    string candidateName, 
-    address candidateAddress,
-    Party candidateParty,
-    uint votes
-);
+// Event that is emitted when the registration for an election is open.
+    event RegistrationOpen(uint _electionID);
+
+    // Event that is emitted when a voter is successfully registered.
+    event VoterRegistered(string _name,address _addr);
+
+    // Event that is emitted when a candidate is successfully registered.
+    event CandidateRegistered(string _name, address _addr, Party _party);
+
+    // Event that is emitted when the registration for an election is closed.
+    event RegistrationClosed(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when an election is started.
+    event StartElection(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when an election is ended.
+    event EndElection(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when the result of a candidate is logged.
+    event LogCandidateResult(string candidateName, address candidateAddress,Party candidateParty,uint votes);
 ```
 
 #### Explanation:
@@ -383,17 +396,26 @@ event LogCandidateResult(
 First we will work on the `allowElectionRegistration` function
 
 ```code=
-function allowElectionRegistration(
+    // Allows the chairperson to open registration for a new election, and emits a RegistrationOpen event.
+    function allowElectionRegistration(
         uint _electionID
     )
     public chairpersonOnly{
-         require(!usedIDs[_electionID], "ERROR: Election ID already exist");
-         require(!(electionDetails[_electionID].startTime>0), "ERROR: Election has started already");
-         usedIDs[_electionID]=true;
-         electionDetails[_electionID].electionStage = ElectionStage.START_REGISTRATION;
-
+         // Require that the election ID has not already been used.
+        require(!usedIDs[_electionID], "ERROR: Election ID already exists");
+        
+        // Require that the election has not started yet.
+        require(!(electionDetails[_electionID].startTime > 0), "ERROR: Election has started already");
+        
+        // Set the used IDs mapping to true for this election.
+        usedIDs[_electionID] = true;
+        // Set the election stage to start registration.
+        electionDetails[_electionID].electionStage = ElectionStage.START_REGISTRATION;
+        
+        // Emit a RegistrationOpen event.
         emit RegistrationOpen(_electionID);
     }
+
 ```
 
 ###### Explanation:
@@ -409,19 +431,31 @@ function allowElectionRegistration(
 
 Next, we will work on the `registerVoter` function.
 ```code=
-function registerVoter(
+    // Function to register a voter for an election.
+    // This function can only be called by the chairperson of the election.
+    function registerVoter(
         uint _electionID,
         string memory name,
         address addr
     )
     public chairpersonOnly {
+       // Check if the election ID is valid.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
+
+        // Check if the registration is open.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+            "ERROR: Registration is not Open"
+            );
+
+        // Check if the voter has already been registered.
         require(isEligibleVoter[_electionID][addr]==false,"ERROR: Voter has already been registered");
-        
+
+        // Register the voter.
         voterDetails[addr] = Voter(name,addr);
         isEligibleVoter[_electionID][addr] = true;
 
+        // Emit the voter registration event.
         emit VoterRegistered(name, addr);
     }
 ```
@@ -434,24 +468,37 @@ function registerVoter(
 Next, we will work on the `registerCandidate` function
 
 ```code=
-function registerCandidate(
+    // Function to register a candidate for an election.
+    // This function can only be called by the chairperson of the election.
+    function registerCandidate(
         uint _electionID,
         string memory _name,
         address addr,
         Party _party
     )
     public chairpersonOnly{
+        // Check if the election ID is valid.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
+
+        // Check if the registration is open.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+            "ERROR: Registration is not Open"
+            );
+
+        // Check if the candidate has already been registered.
         require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
 
+        // Register the candidate.
         candidateDetails[addr]= Candidate(_name,addr,_party);
         electionDetails[_electionID].candidateAddress.push(addr);
         electionDetails[_electionID].candidateVotes.push(0);
 
         isEligibleCandidate[_electionID][addr]=true;
 
+        // Emit the candidate registration event.
         emit CandidateRegistered(_name, addr, _party);
+
     }
 ```
 
@@ -471,19 +518,29 @@ function registerCandidate(
 
 After registration of candidates and voters, the next function is to `initiateElectionData`. Here, we initialize the requirements of the election.
 ```code=
- function initiateElectionData(
+ // Allows the chairperson to initiate an election, and set its duration and type.
+    function initiateElectionData(
         uint _electionID,
         ElectionType _electionType,
         uint _duration 
     )
     public chairpersonOnly{
+       // Require that the election ID has already been used.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Initiated already");
-        require(electionDetails[_electionID].candidateAddress.length > 1,"ERROR: At least 2 candidates are needed");
         
+        // Require that the election is in the start registration stage.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+             "ERROR: Initiated already"
+             );
         
-        usedIDs[_electionID]=true;
-
+        // Require that there are at least 2 candidates for the election.
+        require(electionDetails[_electionID].candidateAddress.length > 1, "ERROR: At least 2 candidates are needed");
+        
+        // Set the used IDs mapping to true for this election.
+        usedIDs[_electionID] = true;
+       
+        // Set various properties of the election details object.
         electionDetails[_electionID].electionID=_electionID;
         electionDetails[_electionID].electionType=_electionType;
         electionDetails[_electionID].winner= address(0);
@@ -511,7 +568,8 @@ After registration of candidates and voters, the next function is to `initiateEl
 
 Time to work on the all important function; the `vote` function.
 ```code=
-function vote(
+    // Allows a voter to cast a vote for a candidate in an election.
+    function vote(
         uint _electionID,
         address candidateAddr
     )
@@ -519,14 +577,24 @@ function vote(
     startedElection(_electionID) beforeDeadline(_electionID)
     eligibleVoter(_electionID,msg.sender) eligibleCandidate(_electionID,candidateAddr)
     {
-        require(!hasVoted[_electionID][msg.sender],"ERROR: You have voted already!");
-        (bool candidateFound, int candidateIndex) = findCandidateIndex(electionDetails[_electionID], candidateAddr);
+        // Require that the voter has not already voted.
+        require(!hasVoted[_electionID][msg.sender], "ERROR: You have voted already!");
+        
+        // Find the index of the candidate in the candidate address array.
+        (bool candidateFound, int candidateIndex) = 
+        findCandidateIndex(electionDetails[_electionID],candidateAddr);
+       
+        // Require that the candidate was found.
         require(candidateFound, "ERROR: Candidate not found in election");
-
+        
+        // Increment the candidate's vote count and the total vote count for the election.
         electionDetails[_electionID].candidateVotes[uint(candidateIndex)]++;
         electionDetails[_electionID].totalVotes++;
-        hasVoted[_electionID][msg.sender]=true;
+        
+        // Set the hasVoted mapping to true for this voter and election.
+        hasVoted[_electionID][msg.sender] = true;
     }
+
 ```
 
 ###### Explanation:
@@ -549,10 +617,20 @@ function vote(
 
 Another important functionality to be implemented is the `endElection` 
 ```code=
- function endElection(uint _electionID)
+    // Asserts the official end of an election,can only be called by the chairperson
+    function endElection(uint _electionID)
     public chairpersonOnly{
+    
+        // check if election ID exists
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(block.timestamp >= electionDetails[_electionID].endTime,"ERROR: Election Deadline has not been met!");
+        
+        // check if current time is after the election deadline
+        require(
+            block.timestamp >= electionDetails[_electionID].endTime,
+            "ERROR: Election Deadline has not been met!"
+            );
+        
+        // set the election stage to end the election
         electionDetails[_electionID].electionStage = ElectionStage.END_ELECTION;
     }
 ```
@@ -571,9 +649,16 @@ Another important functionality to be implemented is the `endElection`
 Displaying the results at the end of the election naturally follows suit.
 
 ```code=
+    //display election results
     function displayResults(uint _electionID) public  chairpersonOnly {
+    // check if election ID exists
     require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-    require(electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION, "ERROR: Election has not ended");
+    
+    // check if the election has ended
+    require(
+        electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION,
+         "ERROR: Election has not ended"
+         );
     
     uint numCandidates = electionDetails[_electionID].candidateAddress.length;
     uint[] memory votes = new uint[](numCandidates);
@@ -583,8 +668,11 @@ Displaying the results at the end of the election naturally follows suit.
         for (uint j = i + 1; j < numCandidates; j++) {
             if (votes[i] < votes[j]) {
                 (votes[i], votes[j]) = (votes[j], votes[i]);
-                (electionDetails[_electionID].candidateAddress[i], electionDetails[_electionID].candidateAddress[j]) = 
-                (electionDetails[_electionID].candidateAddress[j], electionDetails[_electionID].candidateAddress[i]);
+                (electionDetails[_electionID].candidateAddress[i],
+                 electionDetails[_electionID].candidateAddress[j])
+                  = 
+                (electionDetails[_electionID].candidateAddress[j],
+                 electionDetails[_electionID].candidateAddress[i]);
             }
         }
     }
@@ -612,105 +700,165 @@ The full code with slightly more functionalities is given below
 ```code!
 // SPDX-License-Identifier: MIT
 
+// Solidity version requirement
 pragma solidity >=0.7.0 <0.9.0;
 
+// Voting system contract
 contract VotingSystemAttempt{
 
+     // Define election types
     enum ElectionType {PRESIDENTIAL, GUBERNATORIAL, SENATE, HOUSE_OF_REPS}
+
+    // Define election stages
     enum ElectionStage {START_REGISTRATION, START_ELECTION, END_ELECTION}
+
+    // Define political parties
     enum Party {APV,PVP,LV,PDAPC,NONE}
 
+    // Address of the Chairperson
     address chairPerson;
 
-
+    // Constructor function to set the Chairperson as the contract creator
     constructor(){
-        chairPerson = msg.sender;
+        chairPerson = msg.sender; 
     }
 
+    // Define a Candidate struct
     struct Candidate{
-        string name;
-        address addr;
-        Party party;
+        string name; // Name of the candidate
+        address addr; // Ethereum address of the candidate
+        Party party; // Political party of the candidate
     }
 
     struct Voter{
-        string name;
-        address addr;
+       string name; // Name of the voter
+       address addr; // Ethereum address of the voter
     }
 
     struct Election{
-        uint electionID;
-        ElectionType electionType;
-        ElectionStage electionStage;
-        address[] candidateAddress;
-        uint[] candidateVotes;
-        address winner;
-        Party winnerParty;
-        uint totalVotes;
-        uint numOfWinningVotes;
-        uint256 startTime;
-        uint256 endTime;
+        uint electionID; // Election ID
+        ElectionType electionType; // Election type
+        ElectionStage electionStage; // Election stage
+        address[] candidateAddress; // Array of Ethereum addresses of the candidates
+        uint[] candidateVotes; // Array of the number of votes each candidate received
+        address winner; // Ethereum address of the winning candidate
+        Party winnerParty; // Political party of the winning candidate
+        uint totalVotes; // Total number of votes cast
+        uint numOfWinningVotes; // Number of votes the winning candidate received
+        uint256 startTime; // Time the election starts
+        uint256 endTime; // Time the election ends
     }
 
     
+    // Mapping to check if an election ID has been used
     mapping(uint => bool) private usedIDs;
+
+    // Mapping of voter details
     mapping (address=>Voter) voterDetails;
+
+    // Mapping of candidate details
     mapping (address=>Candidate) candidateDetails;
+
+    // Mapping of election details
     mapping (uint=>Election) electionDetails;
-    mapping(uint => mapping(address => bool)) isEligibleVoter; 
+
+    // Mapping of eligible voters for each election
+    mapping(uint => mapping(address => bool)) isEligibleVoter;
+
+    // Mapping of eligible candidates for each election
     mapping(uint => mapping(address => bool)) isEligibleCandidate;
+
+    // Mapping of voters who have already voted in an election
     mapping(uint => mapping (address=>bool)) hasVoted;
 
+    // Modifier to check if the caller is the Chairperson
     modifier chairpersonOnly(){
         require(msg.sender==chairPerson,"ACCESS DENIED: Only the ChairPerson can call this fuction");
         _;
     }
 
+    // Modifier to check if a voter is eligible to vote in an election
     modifier eligibleVoter(uint id,address addr){
         require(isEligibleVoter[id][addr],"ACTION DENIED: Only eligible voters are permitted ");
         _;
     }
     
+    // Modifier to check if a candidate is eligible to participate in an election
     modifier eligibleCandidate(uint id,address addr){
         require(isEligibleCandidate[id][addr],"ACTION DENIED: Only eligible candidates are permitted ");
         _;
     }
 
+    // Modifier to check if an election has started
     modifier startedElection(uint _electionID){
-        require(electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION, "ERROR: Election has not started" );
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_ELECTION,
+             "ERROR: Election has not started"
+              );
+
         require(electionDetails[_electionID].startTime>0,"ERROR: Election has not started");
         _;
     }
 
+    // This modifier checks if the current time is before the election end time.
+    // It only allows the function to be executed if the current time is before the election end time.
     modifier  beforeDeadline(uint _electionID){
         require(block.timestamp < electionDetails[_electionID].endTime, "Election Has Ended");
         _;
     }
 
+    // Event that is emitted when the registration for an election is open.
     event RegistrationOpen(uint _electionID);
+
+    // Event that is emitted when a voter is successfully registered.
     event VoterRegistered(string _name,address _addr);
+
+    // Event that is emitted when a candidate is successfully registered.
     event CandidateRegistered(string _name, address _addr, Party _party);
+
+    // Event that is emitted when the registration for an election is closed.
     event RegistrationClosed(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when an election is started.
     event StartElection(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when an election is ended.
     event EndElection(uint _electionID, ElectionType _electionType);
+
+    // Event that is emitted when the result of a candidate is logged.
     event LogCandidateResult(string candidateName, address candidateAddress,Party candidateParty,uint votes);
 
+    
+    // Function to register a voter for an election.
+    // This function can only be called by the chairperson of the election.
     function registerVoter(
         uint _electionID,
         string memory name,
         address addr
     )
     public chairpersonOnly {
+       // Check if the election ID is valid.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
+
+        // Check if the registration is open.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+            "ERROR: Registration is not Open"
+            );
+
+        // Check if the voter has already been registered.
         require(isEligibleVoter[_electionID][addr]==false,"ERROR: Voter has already been registered");
-        
+
+        // Register the voter.
         voterDetails[addr] = Voter(name,addr);
         isEligibleVoter[_electionID][addr] = true;
 
+        // Emit the voter registration event.
         emit VoterRegistered(name, addr);
     }
 
+    // Function to register a candidate for an election.
+    // This function can only be called by the chairperson of the election.
     function registerCandidate(
         uint _electionID,
         string memory _name,
@@ -718,44 +866,74 @@ contract VotingSystemAttempt{
         Party _party
     )
     public chairpersonOnly{
+        // Check if the election ID is valid.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Registration is not Open");
+
+        // Check if the registration is open.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+            "ERROR: Registration is not Open"
+            );
+
+        // Check if the candidate has already been registered.
         require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
 
+        // Register the candidate.
         candidateDetails[addr]= Candidate(_name,addr,_party);
         electionDetails[_electionID].candidateAddress.push(addr);
         electionDetails[_electionID].candidateVotes.push(0);
 
         isEligibleCandidate[_electionID][addr]=true;
 
+        // Emit the candidate registration event.
         emit CandidateRegistered(_name, addr, _party);
+
     }
 
+    // Allows the chairperson to open registration for a new election, and emits a RegistrationOpen event.
     function allowElectionRegistration(
         uint _electionID
     )
     public chairpersonOnly{
-         require(!usedIDs[_electionID], "ERROR: Election ID already exist");
-         require(!(electionDetails[_electionID].startTime>0), "ERROR: Election has started already");
-         usedIDs[_electionID]=true;
-         electionDetails[_electionID].electionStage = ElectionStage.START_REGISTRATION;
-
+         // Require that the election ID has not already been used.
+        require(!usedIDs[_electionID], "ERROR: Election ID already exists");
+        
+        // Require that the election has not started yet.
+        require(!(electionDetails[_electionID].startTime > 0), "ERROR: Election has started already");
+        
+        // Set the used IDs mapping to true for this election.
+        usedIDs[_electionID] = true;
+        // Set the election stage to start registration.
+        electionDetails[_electionID].electionStage = ElectionStage.START_REGISTRATION;
+        
+        // Emit a RegistrationOpen event.
         emit RegistrationOpen(_electionID);
     }
 
+    
+    // Allows the chairperson to initiate an election, and set its duration and type.
     function initiateElectionData(
         uint _electionID,
         ElectionType _electionType,
         uint _duration 
     )
     public chairpersonOnly{
+       // Require that the election ID has already been used.
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(electionDetails[_electionID].electionStage==ElectionStage.START_REGISTRATION,"ERROR: Initiated already");
-        require(electionDetails[_electionID].candidateAddress.length > 1,"ERROR: At least 2 candidates are needed");
         
+        // Require that the election is in the start registration stage.
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.START_REGISTRATION,
+             "ERROR: Initiated already"
+             );
         
-        usedIDs[_electionID]=true;
-
+        // Require that there are at least 2 candidates for the election.
+        require(electionDetails[_electionID].candidateAddress.length > 1, "ERROR: At least 2 candidates are needed");
+        
+        // Set the used IDs mapping to true for this election.
+        usedIDs[_electionID] = true;
+       
+        // Set various properties of the election details object.
         electionDetails[_electionID].electionID=_electionID;
         electionDetails[_electionID].electionType=_electionType;
         electionDetails[_electionID].winner= address(0);
@@ -768,11 +946,13 @@ contract VotingSystemAttempt{
 
     }
 
+    // Returns the election details for the given ID. Can only be called by the Chairperson
     function getElectionDetails(uint _Id)
         public view chairpersonOnly returns(Election memory){
         return(electionDetails[_Id]);
     }
 
+    // Allows a voter to cast a vote for a candidate in an election.
     function vote(
         uint _electionID,
         address candidateAddr
@@ -781,70 +961,125 @@ contract VotingSystemAttempt{
     startedElection(_electionID) beforeDeadline(_electionID)
     eligibleVoter(_electionID,msg.sender) eligibleCandidate(_electionID,candidateAddr)
     {
-        require(!hasVoted[_electionID][msg.sender],"ERROR: You have voted already!");
-        (bool candidateFound, int candidateIndex) = findCandidateIndex(electionDetails[_electionID], candidateAddr);
+        // Require that the voter has not already voted.
+        require(!hasVoted[_electionID][msg.sender], "ERROR: You have voted already!");
+        
+        // Find the index of the candidate in the candidate address array.
+        (bool candidateFound, int candidateIndex) = 
+        findCandidateIndex(electionDetails[_electionID],candidateAddr);
+       
+        // Require that the candidate was found.
         require(candidateFound, "ERROR: Candidate not found in election");
-
+        
+        // Increment the candidate's vote count and the total vote count for the election.
         electionDetails[_electionID].candidateVotes[uint(candidateIndex)]++;
         electionDetails[_electionID].totalVotes++;
-        hasVoted[_electionID][msg.sender]=true;
+        
+        // Set the hasVoted mapping to true for this voter and election.
+        hasVoted[_electionID][msg.sender] = true;
     }
 
+    // Finds the index of the given of a given candidate in the election array of candidates
     function findCandidateIndex(
         Election storage election, 
         address candidateAddr
         ) private view returns (bool, int) {
+
+        // loop through all candidates to find candidate index
         for (uint i = 0; i < election.candidateAddress.length; i++) {
             if (election.candidateAddress[i] == candidateAddr) {
+
+                // return true and the candidate index if found
                 return (true, int(i));
             }
         }
+        // return false and -1 if candidate not found
         return (false, -1);
     }
 
+    // Asserts the official end of an election,can only be called by the chairperson
     function endElection(uint _electionID)
     public chairpersonOnly{
+    
+        // check if election ID exists
         require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-        require(block.timestamp >= electionDetails[_electionID].endTime,"ERROR: Election Deadline has not been met!");
+        
+        // check if current time is after the election deadline
+        require(
+            block.timestamp >= electionDetails[_electionID].endTime,
+            "ERROR: Election Deadline has not been met!"
+            );
+        
+        // set the election stage to end the election
         electionDetails[_electionID].electionStage = ElectionStage.END_ELECTION;
     }
 
+    //announce winner of a certain election.
+    // can only be called by the chairperson
     function declareWinner(uint _electionID)
     public chairpersonOnly returns(string memory, address, Party,uint){
+        
+        // check if the election has ended
         require(electionDetails[_electionID].endTime <= block.timestamp,"ERROR: Election is still on");
-        require(electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION,"ERROR: Election has not been Officially declared as over");
+        
+        // check if the election has been officially declared as over
+        require(
+            electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION,
+            "ERROR: Election has not been Officially declared as over"
+            );
 
+        // initialize winner information
         uint256 highestVotes = 0;
         uint256 numWinners = 0;
         address winner = address(0);
         Party winnerParty = Party.NONE;
 
+        // get the election details for the given ID
         Election storage election = electionDetails[_electionID];
-
+        
+        // loop through all candidates to find the winner
         for (uint i = 0; i < election.candidateAddress.length; i++) {
             if (election.candidateVotes[i] > highestVotes) {
+                // if candidate has more votes than current highest, update winner information
                 highestVotes = election.candidateVotes[i];
                 numWinners = 1;
                 winner = election.candidateAddress[i];
                 winnerParty = candidateDetails[winner].party;
             } else if (election.candidateVotes[i] == highestVotes) {
+                // if candidate has equal votes as the highest, increment number of winners
                 numWinners++;
             }
         }
 
+        // check if only one candidate has the highest votes
         require(numWinners == 1, "ERROR: Election resulted in a tie");
 
+        // set the winner information in the election struct
         election.winner = winner;
         election.winnerParty = winnerParty;
         election.numOfWinningVotes = highestVotes;
         candidateDetails[winner].name;
-
-        return(candidateDetails[winner].name,election.winner, election.winnerParty, election.numOfWinningVotes);
+        
+        // return winner information
+        return(
+            candidateDetails[winner].name,
+            election.winner, 
+            election.winnerParty, 
+            election.numOfWinningVotes
+            );
     }
 
+
+    //display election results
     function displayResults(uint _electionID) public  chairpersonOnly {
+    // check if election ID exists
     require(usedIDs[_electionID], "ERROR: Election ID does not exist");
-    require(electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION, "ERROR: Election has not ended");
+    
+    // check if the election has ended
+    require(
+        electionDetails[_electionID].electionStage == ElectionStage.END_ELECTION,
+         "ERROR: Election has not ended"
+         );
     
     uint numCandidates = electionDetails[_electionID].candidateAddress.length;
     uint[] memory votes = new uint[](numCandidates);
@@ -854,8 +1089,11 @@ contract VotingSystemAttempt{
         for (uint j = i + 1; j < numCandidates; j++) {
             if (votes[i] < votes[j]) {
                 (votes[i], votes[j]) = (votes[j], votes[i]);
-                (electionDetails[_electionID].candidateAddress[i], electionDetails[_electionID].candidateAddress[j]) = 
-                (electionDetails[_electionID].candidateAddress[j], electionDetails[_electionID].candidateAddress[i]);
+                (electionDetails[_electionID].candidateAddress[i],
+                 electionDetails[_electionID].candidateAddress[j])
+                  = 
+                (electionDetails[_electionID].candidateAddress[j],
+                 electionDetails[_electionID].candidateAddress[i]);
             }
         }
     }
@@ -871,7 +1109,7 @@ contract VotingSystemAttempt{
 }
 
 
-
+    // transfer chairperson control to another eth address
     function transferChairperson(address newChairperson) public  {
         require(msg.sender == chairPerson, "ERROR: Only the current ChairPerson can transfer the role");
         require(newChairperson != address(0), "ERROR: Invalid address specified");
@@ -881,8 +1119,11 @@ contract VotingSystemAttempt{
 }
 ```
 
-Full Code Below
-https://user-images.githubusercontent.com/92434749/235715085-eedfdc96-6226-4667-84ca-487d3b1fde91.mp4
+Video of Full Code Below
+
+
+https://user-images.githubusercontent.com/92434749/235880145-64f59085-0278-4e13-8f2c-4a9a7ddd80d1.mp4
+
 
 
 ## Deploying the Smart Contract Voting System on Celo Testnet Blockchain
@@ -947,7 +1188,6 @@ By implementing the features outlined in this guide, election administrators can
 It is important to note that while the system presented in this guide can be effective, it is not a perfect solution. Potential vulnerabilities and attack vectors should always be considered and mitigated to the best of one's ability. Furthermore, while the Celo Testnet is a suitable platform for testing and experimentation, deploying a real-world smart contract voting system on a public blockchain requires careful consideration and expertise.
 
 Overall, building trust in democracy is a complex and ongoing endeavor, but a secure smart contract voting system is a powerful tool that can help facilitate fair and transparent elections.
-
 
 
 
