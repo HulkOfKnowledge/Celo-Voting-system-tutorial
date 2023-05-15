@@ -877,6 +877,7 @@ contract VotingSystemAttempt{
 
         // Check if the candidate has already been registered.
         require(isEligibleCandidate[_electionID][addr]==false,"ERROR: Candidate has already been registered");
+        require(candidateDetails[_name].name == "", "Candidate with this name is already registered");
 
         // Register the candidate.
         candidateDetails[addr]= Candidate(_name,addr,_party);
