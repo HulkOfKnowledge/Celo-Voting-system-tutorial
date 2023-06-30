@@ -7,7 +7,7 @@ Building Trust in Democracy: A Comprehensive Guide to Creating and Deploying a S
 ===
 
 ## Table Of Content
-* [Introduction]([https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#introduction](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#introduction))
+* [Introduction](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#introduction)
 * [Prerequisites](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#prerequisites)
 * [Requirements](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#requirements)
 * [Understanding Smart Contract and Celo Testnet Blockchain](https://github.com/HulkOfKnowledge/Celo-Voting-system-tutorial#understanding-smart-contract-and-celo-testnet-blockchain)
